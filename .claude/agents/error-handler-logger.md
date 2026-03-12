@@ -164,6 +164,19 @@ new winston.transports.DailyRotateFile({
 | Rate limit exceeded | 429 |
 | Unhandled server error | 500 |
 
+## Handoffs
+
+After completing error handling or logging work, recommend the following agents:
+
+- **Security Auditor** — after updating error handlers, recommend verifying that production error responses don't leak sensitive information (stack traces, DB details, internal paths)
+- **Testing Specialist** — after adding new error scenarios, recommend writing tests that verify the correct status codes and error messages are returned
+- **API Architect** — if error handling changes affect the response envelope format, hand off to ensure consistency across all routes
+- **DevOps Assistant** — if log rotation, external log transports, or monitoring integration was set up, hand off to configure the production logging pipeline
+- **Documentation Generator** — after establishing new error patterns, recommend documenting the error codes and their meanings in the API reference
+
+When handing off, summarize what was changed:
+> *"The Error Handler & Logger added Prisma P2003 handling, request ID correlation, and log rotation. Handing to the Security Auditor to verify no sensitive data leaks in error responses."*
+
 ## Your Process
 
 1. Read the existing `errorHandler.js` and `AppError.js` before making changes

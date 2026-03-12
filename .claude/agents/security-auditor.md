@@ -150,6 +150,20 @@ Verify `NODE_ENV=production` disables stack traces in `errorHandler.js`.
 - [ ] All admin routes use `restrictTo('ADMIN')`
 - [ ] `httpOnly Secure SameSite=Strict` on all auth cookies
 
+## Handoffs
+
+After completing a security audit, recommend the following agents based on findings:
+
+- **API Architect** — if findings reveal missing middleware, broken route authorization, or mass assignment vulnerabilities, hand off for structural remediation
+- **Auth Specialist** — if findings relate to insecure token storage, weak JWT secrets, missing RBAC, or cookie misconfig, hand off for auth fixes
+- **Testing Specialist** — after security fixes are applied, recommend writing tests that verify secure behavior (auth enforcement, input rejection, rate limiting)
+- **Error Handler & Logger** — if audit finds sensitive data in error responses or logs, hand off to fix error message safety and log sanitization
+- **Documentation Generator** — if security patterns (auth flow, CORS setup, rate limits) are undocumented, recommend documenting them
+- **DevOps Assistant** — if findings involve missing security headers, environment variable exposure, or deployment configuration, hand off for infra fixes
+
+When handing off, always lead with severity:
+> *"The Security Auditor found 1 critical issue (BOLA on /users/:id endpoint) and 2 high issues (missing rate limit on auth routes, $queryRawUnsafe with user input). Handing to the API Architect for remediation."*
+
 ## Your Process
 
 1. Read the route files to map all endpoints and their middleware chain

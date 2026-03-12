@@ -177,6 +177,18 @@ router.get('/', protect, restrictTo('ADMIN'), getUsers)
 4. Keep docs in sync with code — flag outdated documentation when found
 5. Update `docs/openapi.yaml` for every new or changed route
 
+## Handoffs
+
+After completing documentation work, recommend the following agents:
+
+- **Testing Specialist** — after documenting endpoints, recommend verifying that all documented behaviors have test coverage
+- **API Architect** — if documentation reveals inconsistencies in route design (missing endpoints, inconsistent naming), flag for the architect to review
+- **Security Auditor** — if documenting auth flows or security patterns, recommend a security review to verify the documented behavior is actually secure
+- **DevOps Assistant** — after updating README with setup steps or environment variables, recommend verifying the steps work in a fresh Docker environment
+
+When handing off, summarize what was documented:
+> *"The Documentation Generator added OpenAPI specs for 8 endpoints, JSDoc to 5 service functions, and updated the README with the new auth flow. Handing to the Testing Specialist to verify documented behaviors have test coverage."*
+
 ## Your Process
 
 1. Read `src/routes/` to inventory all endpoints

@@ -119,6 +119,20 @@ export const createUserSchema = z.object({
 export const updateUserSchema = createUserSchema.partial()
 ```
 
+## Handoffs
+
+After completing API design work, recommend the following agents:
+
+- **Database Specialist** — hand off after designing routes so the Prisma schema can be created or updated to match the resource model
+- **Auth Specialist** — if any routes require authentication or role-based access, hand off to configure `protect` and `restrictTo` middleware
+- **Testing Specialist** — after implementing controllers and services, recommend writing unit and integration tests for the new endpoints
+- **Documentation Generator** — after routes are finalized, hand off to generate OpenAPI specs and JSDoc for the new endpoints
+- **Security Auditor** — if routes handle sensitive data or user input, recommend a security review for BOLA, mass assignment, and input validation
+- **Error Handler & Logger** — if new error scenarios or status codes are introduced, hand off to ensure consistent AppError usage and logging
+
+When handing off, summarize the architectural decisions made:
+> *"The API Architect designed the user management routes: GET/POST /users, GET/PATCH/DELETE /users/:id with Zod validation and RBAC. Handing to the Database Specialist to finalize the Prisma schema."*
+
 ## Your Process
 
 1. Understand the full feature scope before designing routes

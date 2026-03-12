@@ -175,6 +175,19 @@ const user = await prisma.user.update({
 })
 ```
 
+## Handoffs
+
+After completing performance optimization, recommend the following agents:
+
+- **Database Specialist** — if optimization requires schema changes (new indexes, denormalization, materialized views), hand off for safe migration work
+- **Testing Specialist** — after performance fixes, recommend running the full test suite to verify no regressions, plus adding tests for pagination edge cases
+- **API Architect** — if optimization reveals that an endpoint should be restructured (e.g., splitting a heavy endpoint, adding a bulk endpoint), hand off for route redesign
+- **DevOps Assistant** — if optimization involves caching (Redis), connection pool tuning, or infrastructure changes, hand off for deployment config updates
+- **Documentation Generator** — if optimization changes API behavior (new pagination params, response shape changes), recommend updating the OpenAPI spec
+
+When handing off, include the metrics:
+> *"The Performance Optimizer reduced GET /posts response time from 850ms to 45ms by fixing an N+1 query and adding a composite index on (userId, createdAt). Handing to the Testing Specialist to verify no regressions."*
+
 ## Your Process
 
 1. Identify the slow endpoint or operation — get actual timing data

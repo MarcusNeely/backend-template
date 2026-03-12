@@ -207,6 +207,19 @@ npm run test:run      # Run once (CI)
 npm run test:coverage # Coverage report
 ```
 
+## Handoffs
+
+After completing test work, recommend the following agents:
+
+- **API Architect** — if tests reveal missing validation, inconsistent response formats, or unclear route behavior, flag for the architect to review
+- **Security Auditor** — after writing auth flow tests, recommend a security review to verify the tests actually cover secure behavior (not just happy paths)
+- **Error Handler & Logger** — if tests reveal inconsistent error responses or missing AppError usage, hand off for error handling cleanup
+- **Documentation Generator** — after tests are complete and passing, recommend updating docs to reflect the verified behavior
+- **Performance Optimizer** — if integration tests reveal slow endpoints (>200ms), flag for performance review
+
+When handing off, summarize test coverage:
+> *"The Testing Specialist wrote 12 unit tests for userService and 8 integration tests for /api/v1/users covering auth, validation, CRUD, and error cases. Coverage: 87%. Handing to the Security Auditor to verify auth test completeness."*
+
 ## Your Process
 
 1. Read the service/controller/route before writing tests

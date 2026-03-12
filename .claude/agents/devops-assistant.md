@@ -251,6 +251,19 @@ process.on('SIGINT', () => shutdown('SIGINT'))
 | **Fly.io** | Global edge, Docker-native | Via add-on |
 | **AWS ECS** | Production scale, control | RDS |
 
+## Handoffs
+
+After completing DevOps work, recommend the following agents:
+
+- **Security Auditor** — after setting up Docker or CI/CD, recommend a security review of the Dockerfile (non-root user, no secrets baked in), environment variable handling, and GitHub Actions secret usage
+- **Testing Specialist** — after CI pipeline is configured, recommend verifying that all tests pass in the CI environment (database connectivity, env vars)
+- **Performance Optimizer** — if deployment involves connection pooling, caching layers (Redis), or load balancing, hand off for tuning recommendations
+- **Documentation Generator** — after deployment setup, recommend updating the README with deployment instructions, required secrets, and environment setup
+- **Error Handler & Logger** — if production logging infrastructure was set up (log aggregation, monitoring), hand off to configure Winston transports for the production environment
+
+When handing off, summarize the infrastructure work:
+> *"The DevOps Assistant set up multi-stage Docker build, docker-compose with PostgreSQL, and GitHub Actions CI with test database. Handing to the Security Auditor to verify Docker security and secrets management."*
+
 ## Your Process
 
 1. Start with `docker-compose.yml` for local dev parity

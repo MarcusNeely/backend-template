@@ -33,6 +33,7 @@ Invoke by asking Claude: *"Use the [agent name] to..."*
 | **Error Handler & Logger** | `.claude/agents/error-handler-logger.md` | AppError patterns, Winston logging, monitoring |
 | **Testing Specialist** | `.claude/agents/testing-specialist.md` | Vitest unit tests, Supertest integration tests |
 | **DevOps Assistant** | `.claude/agents/devops-assistant.md` | Docker, docker-compose, GitHub Actions CI/CD, deployment |
+| **Orchestrator** | `.claude/agents/orchestrator.md` | Coordinate multi-agent pipelines — use this to run a full workflow |
 
 **Example invocations:**
 - *"Use the API architect to design routes for a product catalog feature"*
@@ -137,6 +138,32 @@ npm run db:reset      # Reset database and re-run all migrations (dev only)
 7. `npm run dev` — API is live at `http://localhost:3000`
 8. Use the **API Architect** agent to plan your feature routes
 9. Use the **Database Specialist** agent to design your domain schema
+
+---
+
+## Agent Workflows
+
+Agents are aware of each other and will recommend handoffs when appropriate. For coordinated multi-agent pipelines, invoke the **Orchestrator** agent.
+
+### Standard Pipelines
+
+| Workflow | Agents Involved (in order) |
+|----------|---------------------------|
+| **New Project Setup** | Architect → Database → Auth → DevOps → Docs |
+| **New Feature** | Architect → Database → Auth → Error Handler → Tester → Security → Docs |
+| **API Integration** | Architect → Auth → Error Handler → Tester → Docs |
+| **Database Migration** | Database → Architect → Performance → Tester → Docs |
+| **Bug Fix** | Tester → Architect → Database → Security → Docs |
+| **Performance Optimization** | Performance → Database → Architect → Tester → Docs |
+| **Pre-Release Audit** | Security → Auth → Tester → DevOps → Docs |
+| **Documentation Sprint** | Docs → Tester → Architect |
+
+### How Agents Communicate
+
+- Each agent's instructions include a **Handoffs** section listing which agents to recommend next
+- When an agent completes work, it provides a summary for the next agent to pick up from
+- The **Orchestrator** manages the full pipeline, passing context between agents and announcing each step
+- You can run a full pipeline by saying: *"Use the Orchestrator to run the New Feature pipeline for [feature name]"*
 
 ---
 
